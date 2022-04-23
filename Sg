@@ -1,0 +1,66 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+
+float func(float x)
+{
+    return (x*x*x-5*x+1); //FUNCTION TO BE SOLVED
+}
+
+
+int main()
+{
+int i=0,pos=0,n=0;
+float x1,x0,x2,d;
+float f0,f1,fx2;
+
+
+while(1)
+    {
+        if (func (i)==0)
+            printf("Exact Root Found %d !!!", i );
+        if( func (i) * func (i+1)<0)
+        {
+            pos++;
+            break;
+        }
+        i++;
+
+    }
+    if(pos)
+    {
+        x0=i;
+        x1=i+1;
+        printf("Range of given function is from %.0f to %.0f\n", x0, x1); //RANGE OF FUNCTION COMES OUT
+    }
+    else
+    {
+        printf("SORRY!! Range of the given function NOT FOUND.");
+    }
+    if(pos)
+	{
+	    printf("The Calculation Table of Secant Method:-\n");
+	    printf("ITERATION \t xi \t\t xi-xi+1 \t f(xi) \n");
+	    f0=func(x0);
+	    f1=func(x1);
+    x2=x1-(x1-x0)*f1/(f1-f0);
+        	    fx2=func(x2);
+             d=x2-x1;
+	     for(i=0;;i++)
+	    {
+	        printf("\n%d \t\t %.4f \t %.4f \t %.4f \n",i+1,x2,d,fx2);
+
+	         if((float)fabs(x2-x1)<=0.0001f||fabs(x2-x1)<=0.0001f)
+	         break;
+	         x0 = x1;
+                  f0 = f1;
+                  x1 = x2;
+                  f1 = fx2;
+	        x2=x1-(x1-x0)*f1/(f1-f0);
+                 fx2=func(x2);
+                 d=x2-x1;
+	      }
+	}
+	printf("ROOT OF THE GIVEN EQUATION IS:- %.4f\n",x2);
+return 0;
+}
